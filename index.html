@@ -3,185 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coca-Cola | Istraži Ukuse</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap" rel="stylesheet">
+    <title>Coca-Cola | Imersivno Degustiranje</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
+        /* Osnovne i UI-boje */
         :root {
-            --bg-color: #F40009; /* Početna crvena */
-            --text-color: #ffffff;
+            --dark-ui: #111;
+            --white-ui: #fff;
+            --overlay-bg: rgba(0,0,0,0.95);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            transition: all 0.5s ease; /* Glatki prelaz boja */
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* Glavni kontejner */
-        .explorer-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 50px 20px;
-            text-align: center;
-        }
-
-        .display-area {
-            max-width: 800px;
-            margin-bottom: 50px;
-        }
-
-        #flavor-title {
-            font-size: 5rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            letter-spacing: -2px;
-        }
-
-        #flavor-desc {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+        /* Osnovna CSS podešavanja */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; transition: all 0.3s ease; }
+        body { background-color: var(--dark-ui); color: var(--white-ui); overflow-x: hidden; }
 
         /* Meni sa izborom koka kola */
         .flavor-selector {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            padding: 100px 5%;
             justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
         .flavor-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
             border-radius: 20px;
             cursor: pointer;
             border: 2px solid transparent;
-            width: 150px;
             text-align: center;
         }
 
-        .flavor-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.2);
+        .flavor-card:hover { transform: scale(1.05); background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.2); }
+        .flavor-card img { width: 120px; height: auto; filter: drop-shadow(0 15px 15px rgba(0,0,0,0.5)); }
+        .flavor-card h4 { margin-top: 15px; font-size: 1rem; font-weight: 700; text-transform: uppercase; }
+
+        /* Modalni prozor (Imersivni ekran) */
+        .modal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: var(--overlay-bg);
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .flavor-card.active {
-            border-color: white;
-            background: rgba(255, 255, 255, 0.3);
+        .modal.open { opacity: 1; visibility: visible; }
+
+        .modal-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            width: 90%; max-width: 1200px;
+            margin: 5% auto;
+            gap: 50px;
+            align-items: center;
         }
 
-        .flavor-card img {
-            width: 80px;
-            height: auto;
-            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.3));
+        .modal-image-area img {
+            width: 100%; max-width: 400px;
+            display: block; margin: 0 auto;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8));
         }
 
-        .flavor-card h4 {
-            margin-top: 10px;
-            font-size: 0.9rem;
-        }
-
-        footer {
-            padding: 20px;
-            font-size: 0.8rem;
-            opacity: 0.7;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="explorer-container">
-        <div class="display-area" id="main-display">
-            <h1 id="flavor-title">Classic</h1>
-            <p id="flavor-desc">Originalni ukus koji je sve započeo. Osveženje koje traje od 1886. godine.</p>
-        </div>
-
-        <div class="flavor-selector">
-            <div class="flavor-card active" onclick="updateFlavor('classic')">
-                <img src="https://img.icons8.com/color/144/coca-cola.png" alt="Classic">
-                <h4>Classic</h4>
-            </div>
-            <div class="flavor-card" onclick="updateFlavor('zero')">
-                <img src="https://img.icons8.com/color/144/coca-cola-zero.png" alt="Zero">
-                <h4>Zero Sugar</h4>
-            </div>
-            <div class="flavor-card" onclick="updateFlavor('cherry')">
-                <img src="https://img.icons8.com/officel/160/cherry.png" alt="Cherry">
-                <h4>Cherry</h4>
-            </div>
-            <div class="flavor-card" onclick="updateFlavor('vanilla')">
-                <img src="https://img.icons8.com/color/144/ice-cream-cone.png" alt="Vanilla">
-                <h4>Vanilla</h4>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        Klikni na ikonicu da promeniš atmosferu sajta.
-    </footer>
-
-    <script>
-        const data = {
-            classic: {
-                title: "Classic",
-                desc: "Originalni ukus koji je sve započeo. Osveženje koje traje od 1886. godine.",
-                color: "#F40009"
-            },
-            zero: {
-                title: "Zero Sugar",
-                desc: "Savršen spoj poznatog ukusa i nula kalorija. Za one koji ne prave kompromise.",
-                color: "#1a1a1a"
-            },
-            cherry: {
-                title: "Cherry Coke",
-                desc: "Eksplozija slatke trešnje u svakom gutljaju. Omiljeni izbor za ljubitelje voćnih nota.",
-                color: "#8B0000"
-            },
-            vanilla: {
-                title: "Vanilla",
-                desc: "Glatka i kremasta nota vanile koja pruža luksuzan osećaj osveženja.",
-                color: "#F3E5AB"
-            }
-        };
-
-        function updateFlavor(flavor) {
-            const flavorInfo = data[flavor];
-            
-            // Promena boja i teksta
-            document.documentElement.style.setProperty('--bg-color', flavorInfo.color);
-            document.getElementById('flavor-title').innerText = flavorInfo.title;
-            document.getElementById('flavor-desc').innerText = flavorInfo.desc;
-
-            // Kontrola svetlog/tamnog teksta
-            if (flavor === 'vanilla') {
-                document.body.style.color = '#333';
-            } else {
-                document.body.style.color = '#fff';
-            }
-
-            // Ažuriranje aktivne kartice
-            const cards = document.querySelectorAll('.flavor-card');
-            cards.forEach(card => card.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-        }
-    </script>
-</body>
-</html>
+        .modal-text-area { padding-right: 30px; }
+        .close-btn { position: absolute; top: 20px; right: 20px; cursor: pointer; font-size: 3rem
