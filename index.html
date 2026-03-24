@@ -1,112 +1,197 @@
 <!DOCTYPE html>
 <html lang="sr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coca-Cola | Interactive Experience</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --accent: #F40009;
-            --glass: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coca-Cola Cherry</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        
-        body { 
-            background: #050505; 
-            color: #fff; 
-            overflow-x: hidden; 
-            background-image: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #050505 100%);
-            min-height: 100vh;
-        }
+    body {
+      background: linear-gradient(to bottom, #f00 0%, #fff 100%);
+      color: #fff;
+      line-height: 1.6;
+    }
 
-        /* --- GLAVNI EKRAN --- */
-        .main-screen {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
+    header {
+      background-color: #e10600;
+      padding: 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
-        .main-title { font-size: 3.5rem; font-weight: 900; margin-bottom: 50px; text-transform: uppercase; letter-spacing: 5px; text-align: center; }
+    header h1 {
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+    }
 
-        .selector-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
-            width: 100%;
-            max-width: 1100px;
-        }
+    nav {
+      margin-top: 10px;
+    }
 
-        .flavor-card {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            padding: 40px 20px;
-            border-radius: 30px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
 
-        .flavor-card:hover { transform: translateY(-15px); background: rgba(255, 255, 255, 0.15); border-color: #fff; }
-        .flavor-card img { width: 100px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5)); }
-        .flavor-card h2 { margin-top: 20px; font-size: 1.2rem; text-transform: uppercase; }
+    nav a:hover {
+      text-decoration: underline;
+    }
 
-        /* --- DASHBOARD MODAL --- */
-        #dashboard {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.98);
-            z-index: 9999;
-            display: none;
-            overflow-y: auto;
-            padding: 40px 5%;
-        }
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
 
-        .dashboard-content {
-            display: grid;
-            grid-template-columns: 1fr 0.8fr 1fr;
-            gap: 30px;
-            max-width: 1400px;
-            margin: 0 auto;
-            align-items: start;
-        }
+    section {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      margin-bottom: 30px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+    }
 
-        @media (max-width: 1100px) { .dashboard-content { grid-template-columns: 1fr; } }
+    section h2 {
+      color: #ffd1dc;
+      margin-bottom: 15px;
+      font-size: 2rem;
+      text-align: center;
+    }
 
-        /* Kolone */
-        .col { display: flex; flex-direction: column; gap: 25px; }
+    section p, section li {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
 
-        .glass-panel {
-            background: var(--glass);
-            padding: 30px;
-            border-radius: 25px;
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(15px);
-        }
+    ul {
+      list-style: disc;
+      padding-left: 20px;
+    }
 
-        .close-btn { position: absolute; top: 30px; right: 40px; font-size: 3rem; cursor: pointer; color: #666; transition: 0.3s; }
-        .close-btn:hover { color: #fff; transform: rotate(90deg); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
 
-        /* Tipografija u dashboardu */
-        .dash-title { font-size: 4rem; font-weight: 900; line-height: 1; margin-bottom: 10px; }
-        .tagline { color: var(--accent); font-weight: 700; text-transform: uppercase; margin-bottom: 20px; display: block; }
-        h3 { font-size: 1.1rem; text-transform: uppercase; margin-bottom: 15px; color: rgba(255,255,255,0.6); letter-spacing: 1px; }
-        p { line-height: 1.6; font-size: 0.95rem; color: #ccc; }
+    table, th, td {
+      border: 1px solid #fff;
+    }
 
-        /* Nutritivna Tabela */
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        table td { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; }
-        table td:last-child { text-align: right; font-weight: 700; }
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
 
-        /* Centralna slika */
-        .bottle-focus img { width: 100%; max-width: 400px; display: block; margin: 0 auto; filter: drop-shadow(0 0 50px rgba(244,0,9,0.3)); }
+    th {
+      background-color: #ff4c4c;
+    }
 
-        /* Liste Sastojaka i Karakteristika */
-        .feature-list { list-style: none; }
-        .feature-list li { margin-bottom: 10px; display: flex; align
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #e10600;
+      margin-top: 40px;
+    }
+
+    /* Animacija dugmeta */
+    .btn {
+      display: inline-block;
+      padding: 10px 25px;
+      background-color: #fff;
+      color: #e10600;
+      font-weight: bold;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #ffd1dc;
+      color: #e10600;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Coca-Cola Cherry</h1>
+    <nav>
+      <a href="#ukus">Voćna Eksplozija</a>
+      <a href="#sastojci">Spoj Ukusa</a>
+      <a href="#posluzivanje">Saveti</a>
+      <a href="#nutritivna">Nutritivna</a>
+      <a href="#istorija">Istorija</a>
+    </nav>
+  </header>
+
+  <div class="container">
+
+    <section id="ukus">
+      <h2>Voćna Eksplozija</h2>
+      <p>Slatko, sočno i neodoljivo. Coca-Cola Cherry je prvi voćni ukus koji je osvojio srca miliona širom sveta. Kombinacija ikoničnog osveženja i slatke trešnje stvara savršen balans između klasičnog i avanturističkog. U svakom gutljaju, osetićete početno gaziranje praćeno bogatim, voćnim finišem koji ostavlja dugotrajan, prijatan ukus. Ovo je piće za one koji traže nešto drugačije, a opet prepoznatljivo.</p>
+    </section>
+
+    <section id="sastojci">
+      <h2>Spoj Ukusa</h2>
+      <p><strong>Glavne note:</strong> Classic Coca-Cola, crvena trešnja, blaga vanila, karamela.</p>
+      <p><strong>Sastojci:</strong> Gazirana voda, šećer, boje (karamel-kolor E150d), kiselina (fosforna kiselina), prirodne arome (uključujući kofein).</p>
+    </section>
+
+    <section id="posluzivanje">
+      <h2>Saveti i Posluživanje</h2>
+      <ul>
+        <li>Najbolje se služi ohlađeno na 4°C, u staklenoj čaši sa 3-4 kocke leda.</li>
+        <li>Odlično ide uz burgere, roštilj, pa čak i čokoladne deserte.</li>
+      </ul>
+    </section>
+
+    <section id="nutritivna">
+      <h2>Nutritivna Tabela</h2>
+      <table>
+        <tr>
+          <th>Energija</th>
+          <th>Masti</th>
+          <th>Ugljeni hidrati</th>
+          <th>Šećeri</th>
+          <th>Proteini</th>
+          <th>So</th>
+        </tr>
+        <tr>
+          <td>190 kJ / 45 kcal</td>
+          <td>0g</td>
+          <td>11.2g</td>
+          <td>11.2g</td>
+          <td>0g</td>
+          <td>0.0g</td>
+        </tr>
+      </table>
+    </section>
+
+    <section id="istorija">
+      <h2>Zanimljivosti i Istorija</h2>
+      <p>Prvi put je predstavljena kao limitirano izdanje u SAD-u 1985. godine, ali je zbog neverovatne popularnosti postala stalni član Coca-Cola porodice.</p>
+      <a href="#ukus" class="btn">Nazad na vrh</a>
+    </section>
+
+  </div>
+
+  <footer>
+    &copy; 2026 Coca-Cola. Sva prava zadržana.
+  </footer>
+
+</body>
+</html>
