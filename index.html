@@ -1,166 +1,187 @@
 <!DOCTYPE html>
 <html lang="sr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coca-Cola Premium</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coca-Cola | Istraži Ukuse</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #F40009; /* Početna crvena */
+            --text-color: #ffffff;
+        }
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.5s ease; /* Glatki prelaz boja */
+        }
 
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background:#f5f5f5;
-    }
+        /* Glavni kontejner */
+        .explorer-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 20px;
+            text-align: center;
+        }
 
-    header {
-      background:#e41c2d;
-      color:white;
-      padding:20px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-    }
+        .display-area {
+            max-width: 800px;
+            margin-bottom: 50px;
+        }
 
-    nav a {
-      margin:0 10px;
-      color:white;
-      text-decoration:none;
-      font-weight:600;
-    }
+        #flavor-title {
+            font-size: 5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+        }
 
-    .hero {
-      height:90vh;
-      background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1580910051074-3eb694886505') center/cover;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      color:white;
-      text-align:center;
-      animation: fadeIn 2s;
-    }
+        #flavor-desc {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
-    .hero h1 { font-size:50px; }
-    .hero p { margin:15px 0; }
+        /* Meni sa izborom koka kola */
+        .flavor-selector {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
-    button {
-      background:#e41c2d;
-      border:none;
-      padding:12px 25px;
-      color:white;
-      border-radius:8px;
-      cursor:pointer;
-      transition:0.3s;
-    }
+        .flavor-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            width: 150px;
+            text-align: center;
+        }
 
-    button:hover { background:#b71525; transform:scale(1.05); }
+        .flavor-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+        }
 
-    .section { padding:60px 20px; text-align:center; }
+        .flavor-card.active {
+            border-color: white;
+            background: rgba(255, 255, 255, 0.3);
+        }
 
-    .products {
-      display:grid;
-      grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-      gap:20px;
-      margin-top:30px;
-    }
+        .flavor-card img {
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.3));
+        }
 
-    .card {
-      background:white;
-      padding:20px;
-      border-radius:15px;
-      box-shadow:0 5px 15px rgba(0,0,0,0.2);
-      transition:0.3s;
-    }
+        .flavor-card h4 {
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
 
-    .card:hover { transform:translateY(-10px); }
-
-    .login-box {
-      max-width:300px;
-      margin:30px auto;
-      background:white;
-      padding:20px;
-      border-radius:10px;
-    }
-
-    input {
-      width:100%;
-      padding:10px;
-      margin:10px 0;
-      border-radius:5px;
-      border:1px solid #ccc;
-    }
-
-    footer {
-      background:#111;
-      color:white;
-      padding:20px;
-      text-align:center;
-    }
-
-    @keyframes fadeIn {
-      from { opacity:0; transform:translateY(20px); }
-      to { opacity:1; transform:translateY(0); }
-    }
-  </style>
+        footer {
+            padding: 20px;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
-<header>
-  <h2>Coca-Cola</h2>
-  <nav>
-    <a href="#">Početna</a>
-    <a href="#products">Proizvodi</a>
-    <a href="#login">Login</a>
-  </nav>
-</header>
+    <div class="explorer-container">
+        <div class="display-area" id="main-display">
+            <h1 id="flavor-title">Classic</h1>
+            <p id="flavor-desc">Originalni ukus koji je sve započeo. Osveženje koje traje od 1886. godine.</p>
+        </div>
 
-<section class="hero">
-  <h1>Open Happiness</h1>
-  <p>Najbolje osveženje na svetu</p>
-  <button onclick="alert('Poručeno!')">Kupi odmah</button>
-</section>
+        <div class="flavor-selector">
+            <div class="flavor-card active" onclick="updateFlavor('classic')">
+                <img src="https://img.icons8.com/color/144/coca-cola.png" alt="Classic">
+                <h4>Classic</h4>
+            </div>
+            <div class="flavor-card" onclick="updateFlavor('zero')">
+                <img src="https://img.icons8.com/color/144/coca-cola-zero.png" alt="Zero">
+                <h4>Zero Sugar</h4>
+            </div>
+            <div class="flavor-card" onclick="updateFlavor('cherry')">
+                <img src="https://img.icons8.com/officel/160/cherry.png" alt="Cherry">
+                <h4>Cherry</h4>
+            </div>
+            <div class="flavor-card" onclick="updateFlavor('vanilla')">
+                <img src="https://img.icons8.com/color/144/ice-cream-cone.png" alt="Vanilla">
+                <h4>Vanilla</h4>
+            </div>
+        </div>
+    </div>
 
-<section id="products" class="section">
-  <h2>Proizvodi</h2>
-  <div class="products">
-    <div class="card"><h3>Classic</h3><p>Original</p><button onclick="buy('Classic')">Kupi</button></div>
-    <div class="card"><h3>Zero</h3><p>Bez šećera</p><button onclick="buy('Zero')">Kupi</button></div>
-    <div class="card"><h3>Cherry</h3><p>Višnja</p><button onclick="buy('Cherry')">Kupi</button></div>
-  </div>
-</section>
+    <footer>
+        Klikni na ikonicu da promeniš atmosferu sajta.
+    </footer>
 
-<section id="login" class="section">
-  <h2>Login</h2>
-  <div class="login-box">
-    <input type="text" id="user" placeholder="Username">
-    <input type="password" id="pass" placeholder="Password">
-    <button onclick="login()">Login</button>
-  </div>
-</section>
+    <script>
+        const data = {
+            classic: {
+                title: "Classic",
+                desc: "Originalni ukus koji je sve započeo. Osveženje koje traje od 1886. godine.",
+                color: "#F40009"
+            },
+            zero: {
+                title: "Zero Sugar",
+                desc: "Savršen spoj poznatog ukusa i nula kalorija. Za one koji ne prave kompromise.",
+                color: "#1a1a1a"
+            },
+            cherry: {
+                title: "Cherry Coke",
+                desc: "Eksplozija slatke trešnje u svakom gutljaju. Omiljeni izbor za ljubitelje voćnih nota.",
+                color: "#8B0000"
+            },
+            vanilla: {
+                title: "Vanilla",
+                desc: "Glatka i kremasta nota vanile koja pruža luksuzan osećaj osveženja.",
+                color: "#F3E5AB"
+            }
+        };
 
-<footer>
-  © 2026 Coca-Cola Style
-</footer>
+        function updateFlavor(flavor) {
+            const flavorInfo = data[flavor];
+            
+            // Promena boja i teksta
+            document.documentElement.style.setProperty('--bg-color', flavorInfo.color);
+            document.getElementById('flavor-title').innerText = flavorInfo.title;
+            document.getElementById('flavor-desc').innerText = flavorInfo.desc;
 
-<script>
-function buy(product) {
-  alert('Kupio si: ' + product);
-}
+            // Kontrola svetlog/tamnog teksta
+            if (flavor === 'vanilla') {
+                document.body.style.color = '#333';
+            } else {
+                document.body.style.color = '#fff';
+            }
 
-function login() {
-  let u = document.getElementById('user').value;
-  let p = document.getElementById('pass').value;
-
-  if(u === 'admin' && p === '1234') {
-    alert('Uspešan login!');
-  } else {
-    alert('Pogrešan login');
-  }
-}
-</script>
-
+            // Ažuriranje aktivne kartice
+            const cards = document.querySelectorAll('.flavor-card');
+            cards.forEach(card => card.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
+    </script>
 </body>
 </html>
