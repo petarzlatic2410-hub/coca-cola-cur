@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coca-Cola Cherry</title>
+  <title>Coca-Cola Ukusi</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -16,7 +16,7 @@
     body {
       background: linear-gradient(to bottom, #f00 0%, #fff 100%);
       color: #fff;
-      line-height: 1.6;
+      overflow-x: hidden;
     }
 
     header {
@@ -26,11 +26,13 @@
       position: sticky;
       top: 0;
       z-index: 100;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
 
     header h1 {
       font-size: 2.5rem;
       letter-spacing: 2px;
+      text-shadow: 2px 2px 5px #000;
     }
 
     nav {
@@ -40,7 +42,7 @@
     nav a {
       color: #fff;
       text-decoration: none;
-      margin: 0 15px;
+      margin: 0 10px;
       font-weight: bold;
       transition: 0.3s;
     }
@@ -53,6 +55,8 @@
       max-width: 1000px;
       margin: 40px auto;
       padding: 0 20px;
+      position: relative;
+      z-index: 2;
     }
 
     section {
@@ -61,6 +65,12 @@
       margin-bottom: 30px;
       border-radius: 15px;
       backdrop-filter: blur(10px);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    section:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
     }
 
     section h2 {
@@ -104,9 +114,9 @@
       padding: 20px;
       background-color: #e10600;
       margin-top: 40px;
+      box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
     }
 
-    /* Animacija dugmeta */
     .btn {
       display: inline-block;
       padding: 10px 25px;
@@ -123,32 +133,66 @@
       color: #e10600;
       transform: scale(1.1);
     }
+
+    /* Animacija mehurića */
+    .bubbles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: -50px;
+      width: 15px;
+      height: 15px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 50%;
+      animation: rise 6s infinite ease-in;
+    }
+
+    @keyframes rise {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-1200px) scale(1.5); opacity: 0; }
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Coca-Cola Cherry</h1>
+    <h1>Coca-Cola Ukusi</h1>
     <nav>
-      <a href="#ukus">Voćna Eksplozija</a>
-      <a href="#sastojci">Spoj Ukusa</a>
+      <a href="#cherry">Cherry</a>
+      <a href="#vanilla">Vanilla</a>
+      <a href="#zero">Zero</a>
       <a href="#posluzivanje">Saveti</a>
       <a href="#nutritivna">Nutritivna</a>
       <a href="#istorija">Istorija</a>
     </nav>
   </header>
 
+  <!-- Mehurići -->
+  <div class="bubbles"></div>
+
   <div class="container">
 
-    <section id="ukus">
-      <h2>Voćna Eksplozija</h2>
-      <p>Slatko, sočno i neodoljivo. Coca-Cola Cherry je prvi voćni ukus koji je osvojio srca miliona širom sveta. Kombinacija ikoničnog osveženja i slatke trešnje stvara savršen balans između klasičnog i avanturističkog. U svakom gutljaju, osetićete početno gaziranje praćeno bogatim, voćnim finišem koji ostavlja dugotrajan, prijatan ukus. Ovo je piće za one koji traže nešto drugačije, a opet prepoznatljivo.</p>
+    <section id="cherry">
+      <h2>Coca-Cola Cherry</h2>
+      <p>Slatko, sočno i neodoljivo. Prvi voćni ukus koji je osvojio srca miliona. Kombinacija klasičnog i avanturističkog. Početno gaziranje praćeno bogatim, voćnim finišem. Savršen balans između klasičnog i drugačijeg.</p>
     </section>
 
-    <section id="sastojci">
-      <h2>Spoj Ukusa</h2>
-      <p><strong>Glavne note:</strong> Classic Coca-Cola, crvena trešnja, blaga vanila, karamela.</p>
-      <p><strong>Sastojci:</strong> Gazirana voda, šećer, boje (karamel-kolor E150d), kiselina (fosforna kiselina), prirodne arome (uključujući kofein).</p>
+    <section id="vanilla">
+      <h2>Coca-Cola Vanilla</h2>
+      <p>Mekani ukus vanile sa poznatim Coca-Cola osveženjem. Slatka, ali ne previše. Idealan izbor za one koji vole klasično piće sa blagim twistom. Savršeno za tople letnje dane i poslastice.</p>
+    </section>
+
+    <section id="zero">
+      <h2>Coca-Cola Zero</h2>
+      <p>Bez šećera, punog ukusa. Za one koji žele klasik bez kalorija. Osećaj gaziranja i poznati Coca-Cola okus ostaje netaknut. Idealan uz bilo koji obrok ili samostalno piće.</p>
     </section>
 
     <section id="posluzivanje">
@@ -160,7 +204,7 @@
     </section>
 
     <section id="nutritivna">
-      <h2>Nutritivna Tabela</h2>
+      <h2>Nutritivna Tabela (Coca-Cola Cherry)</h2>
       <table>
         <tr>
           <th>Energija</th>
@@ -183,8 +227,8 @@
 
     <section id="istorija">
       <h2>Zanimljivosti i Istorija</h2>
-      <p>Prvi put je predstavljena kao limitirano izdanje u SAD-u 1985. godine, ali je zbog neverovatne popularnosti postala stalni član Coca-Cola porodice.</p>
-      <a href="#ukus" class="btn">Nazad na vrh</a>
+      <p>Prvi put predstavljena kao limitirano izdanje u SAD-u 1985. godine, ali je zbog neverovatne popularnosti postala stalni član Coca-Cola porodice.</p>
+      <a href="#cherry" class="btn">Nazad na vrh</a>
     </section>
 
   </div>
@@ -192,6 +236,21 @@
   <footer>
     &copy; 2026 Coca-Cola. Sva prava zadržana.
   </footer>
+
+  <script>
+    // Generisanje mehurića
+    const bubblesContainer = document.querySelector('.bubbles');
+    for(let i=0; i<50; i++) {
+      const bubble = document.createElement('div');
+      bubble.classList.add('bubble');
+      bubble.style.left = Math.random() * 100 + 'vw';
+      bubble.style.width = 5 + Math.random() * 20 + 'px';
+      bubble.style.height = bubble.style.width;
+      bubble.style.animationDuration = 4 + Math.random() * 6 + 's';
+      bubble.style.animationDelay = Math.random() * 5 + 's';
+      bubblesContainer.appendChild(bubble);
+    }
+  </script>
 
 </body>
 </html>
