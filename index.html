@@ -1,155 +1,124 @@
 <!DOCTYPE html>
 <html lang="sr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>McDonald's Srbija - Ultimate Fan Site</title>
-  <style>
-    :root{
-      --red:#d62828; --yellow:#fcbf49; --orange:#f77f00; --bg:#fff8e1; --text:#222; --card:#fff; --shadow:0 8px 20px rgba(0,0,0,.12);
-    }
-    body.dark{ --bg:#121212; --text:#eee; --card:#1e1e1e; --shadow:0 8px 20px rgba(0,0,0,.6);} 
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Arial, Helvetica, sans-serif;background:var(--bg);color:var(--text);transition:.3s}
-    header{position:sticky;top:0;z-index:10;background:var(--red);color:#fff;padding:16px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px}
-    header .title{font-weight:900;font-size:22px}
-    nav a{color:#fff;text-decoration:none;margin:0 10px;font-weight:700}
-    nav a:hover{text-decoration:underline}
-    .actions{display:flex;gap:10px;align-items:center}
-    .btn{background:var(--orange);border:none;color:#fff;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700}
-    .btn:hover{filter:brightness(.9)}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>McDonald's ULTIMATE GOD MODE</title>
 
-    .hero{height:320px;background:url('https://images.unsplash.com/photo-1550547660-d9450f859349') center/cover no-repeat;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-    .hero h1{color:#fff;font-size:42px;text-shadow:2px 2px 10px #000;opacity:0;transform:translateY(40px);animation:fadeUp .8s forwards}
-    @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+<style>
+:root{--bg:#fff8e1;--text:#222;--card:#fff;--red:#d62828}
+body.dark{--bg:#111;--text:#eee;--card:#1e1e1e}
+body{margin:0;font-family:Arial;background:var(--bg);color:var(--text);overflow:hidden}
 
-    .container{padding:18px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
-    .card{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:12px;text-align:center;transition:.25s;position:relative;overflow:hidden}
-    .card:hover{transform:translateY(-6px) scale(1.02)}
-    .card img{width:100%;height:120px;object-fit:cover;border-radius:10px}
-    .card h3{margin:10px 0 6px}
-    .price{font-weight:900}
+header{background:var(--red);color:#fff;padding:10px;display:flex;justify-content:space-between}
+button{background:orange;border:none;color:white;padding:8px;border-radius:8px;cursor:pointer}
 
-    .floating-cart{position:fixed;right:12px;bottom:12px;background:var(--red);color:#fff;padding:12px 16px;border-radius:999px;cursor:pointer;box-shadow:var(--shadow)}
+.hero{height:200px;background:url('https://images.unsplash.com/photo-1550547660-d9450f859349') center/cover;display:flex;align-items:center;justify-content:center}
+.hero h1{color:white;animation:pop 1s}
+@keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
 
-    .cart{position:fixed;right:0;top:0;height:100%;width:320px;background:var(--card);box-shadow:var(--shadow);transform:translateX(100%);transition:.3s;padding:16px;overflow:auto;z-index:20}
-    .cart.open{transform:translateX(0)}
-    .cart h2{margin-top:0}
-    .cart-item{display:flex;justify-content:space-between;margin:6px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;padding:10px}
+.card{background:var(--card);padding:10px;border-radius:10px;text-align:center;transition:.3s}
+.card:hover{transform:scale(1.15) rotate(3deg)}
+.card img{width:100%;height:100px;object-fit:cover}
 
-    .game{margin-top:30px;padding:20px;background:var(--card);border-radius:12px;text-align:center}
-    .burger{font-size:40px;cursor:pointer;transition:.1s}
-    .burger:active{transform:scale(1.2)}
+.cart{position:fixed;right:-300px;top:0;width:300px;height:100%;background:var(--card);transition:.3s;padding:10px}
+.cart.open{right:0}
 
-    footer{background:var(--red);color:#fff;text-align:center;padding:14px;margin-top:20px}
+.game{position:fixed;bottom:0;left:0;width:100%;height:200px;background:#222;color:white;text-align:center}
+.drop{position:absolute;font-size:30px}
 
-    @media(max-width:600px){header{flex-direction:column;align-items:flex-start}.hero h1{font-size:28px}}
-  </style>
+canvas{position:fixed;top:0;left:0;z-index:-1}
+</style>
 </head>
 <body>
 
+<canvas id="bg"></canvas>
+
 <header>
-  <div class="title">McDonald's 🍔</div>
-  <nav>
-    <a href="#">Početna</a>
-    <a href="#meni">Meni</a>
-    <a href="#game">Mini Game</a>
-  </nav>
-  <div class="actions">
-    <button class="btn" onclick="toggleDark()">🌙</button>
-    <button class="btn" onclick="toggleCart()">🛒</button>
-  </div>
+<div>🍔 GOD MODE</div>
+<div>
+<button onclick="dark()">🌙</button>
+<button onclick="toggleCart()">🛒</button>
+<button onclick="login()">👤</button>
+</div>
 </header>
 
-<div class="hero">
-  <h1>Poruči sve iz Meka 🔥</h1>
+<div class="hero"><h1>ULTIMATE SITE</h1></div>
+
+<div style="text-align:center">
+<button onclick="ai()">🤖 AI preporuka</button>
+<p id="ai"></p>
 </div>
 
-<div class="container" id="meni">
-  <h2>Meni (full)</h2>
-  <div class="grid" id="menu"></div>
+<div class="grid" id="menu"></div>
+
+<div class="cart" id="cart">
+<h2>KORPA</h2>
+<div id="items"></div>
+<h3 id="total"></h3>
+<button onclick="checkout()">💳 Plati</button>
+<button onclick="receipt()">🧾 Račun</button>
 </div>
 
 <div class="game" id="game">
-  <h2>Mini Game: Klikni burger 🍔</h2>
-  <p>Score: <span id="score">0</span></p>
-  <div class="burger" onclick="clickBurger()">🍔</div>
+<h3>🎮 HVATAJ BURGERE</h3>
+Score: <span id="score">0</span>
 </div>
-
-<div class="floating-cart" onclick="toggleCart()">🛒 Korpa (<span id="count">0</span>)</div>
-
-<div class="cart" id="cart">
-  <h2>Tvoja porudžbina</h2>
-  <div id="cartItems"></div>
-  <h3>Ukupno: <span id="total">0</span> RSD</h3>
-</div>
-
-<footer>
-  Ultimate McDonald's Fan Site 🚀
-</footer>
 
 <script>
-  const items = [
-    {name:"Big Mac", price:450},
-    {name:"Cheeseburger", price:250},
-    {name:"Double Cheeseburger", price:350},
-    {name:"McChicken", price:300},
-    {name:"Filet-O-Fish", price:400},
-    {name:"Quarter Pounder", price:500},
-    {name:"Pomfrit", price:200},
-    {name:"Nuggets 6", price:300},
-    {name:"Nuggets 9", price:400},
-    {name:"Coca-Cola", price:180},
-    {name:"Fanta", price:180},
-    {name:"Sprite", price:180},
-    {name:"Milkshake", price:350},
-    {name:"Sladoled", price:150},
-    {name:"Apple Pie", price:200}
-  ];
+const data=[
+{name:"Big Mac",price:450,img:"https://images.unsplash.com/photo-1568901346375-23c9450c58cd"},
+{name:"Pomfrit",price:200,img:"https://images.unsplash.com/photo-1576107232684-1279f390859f"},
+{name:"Coca Cola",price:180,img:"https://images.unsplash.com/photo-1581636625402-29b2a704ef13"},
+{name:"Milkshake",price:350,img:"https://images.unsplash.com/photo-1572490122747-3968b75cc699"}
+];
 
-  const menuDiv = document.getElementById('menu');
-  items.forEach(i=>{
-    const el = document.createElement('div');
-    el.className='card';
-    el.innerHTML=`<img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd"><h3>${i.name}</h3><div class='price'>${i.price} RSD</div><button class='btn' onclick="add('${i.name}',${i.price})">Poruči</button>`;
-    menuDiv.appendChild(el);
-  });
+const menu=document.getElementById('menu');
+data.forEach(i=>{
+let d=document.createElement('div');
+d.className='card';
+d.innerHTML=`<img src="${i.img}"><h3>${i.name}</h3><p>${i.price}</p><button onclick="add('${i.name}',${i.price})">BUY</button>`;
+menu.appendChild(d);
+});
 
-  let cart=[];
+let cart=[];let score=0;
 
-  function add(name,price){
-    cart.push({name,price});
-    renderCart();
-  }
+function add(n,p){cart.push({n,p});render();spawn();}
 
-  function renderCart(){
-    const list=document.getElementById('cartItems');
-    list.innerHTML='';
-    let total=0;
-    cart.forEach(i=>{
-      total+=i.price;
-      list.innerHTML+=`<div class='cart-item'><span>${i.name}</span><span>${i.price}</span></div>`;
-    });
-    document.getElementById('total').innerText=total;
-    document.getElementById('count').innerText=cart.length;
-  }
+function render(){let el=document.getElementById('items');el.innerHTML='';let t=0;cart.forEach(i=>{t+=i.p;el.innerHTML+=i.n+'<br>'});document.getElementById('total').innerText='Total: '+t}
 
-  function toggleCart(){
-    document.getElementById('cart').classList.toggle('open');
-  }
+function toggleCart(){document.getElementById('cart').classList.toggle('open')}
+function dark(){document.body.classList.toggle('dark')}
 
-  function toggleDark(){
-    document.body.classList.toggle('dark');
-  }
+function ai(){let arr=["Big Mac combo","Pomfrit + Cola","Milkshake OP"];document.getElementById('ai').innerText=arr[Math.floor(Math.random()*arr.length)]}
 
-  let score=0;
-  function clickBurger(){
-    score++;
-    document.getElementById('score').innerText=score;
-  }
+function receipt(){alert(cart.map(i=>i.n+' '+i.p).join('\n'))}
+
+function checkout(){alert('Plaćeno ✅');cart=[];render()}
+
+function login(){alert('Ulogovan si 😎')}
+
+/* GAME */
+function spawn(){
+let b=document.createElement('div');
+b.className='drop';
+b.innerText='🍔';
+b.style.left=Math.random()*90+'%';
+document.getElementById('game').appendChild(b);
+let y=0;
+let fall=setInterval(()=>{
+y+=5;b.style.top=y+'px';
+if(y>150){clearInterval(fall);b.remove()}
+},50);
+b.onclick=()=>{score++;document.getElementById('score').innerText=score;b.remove();clearInterval(fall)};
+}
+
+/* PARTICLES */
+let c=document.getElementById('bg');let ctx=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;
+let p=[];for(let i=0;i<30;i++){p.push({x:Math.random()*c.width,y:Math.random()*c.height})}
+function anim(){ctx.clearRect(0,0,c.width,c.height);p.forEach(a=>{a.y+=0.3;if(a.y>c.height)a.y=0;ctx.fillStyle='orange';ctx.fillRect(a.x,a.y,2,2)});requestAnimationFrame(anim)}anim();
 </script>
 
 </body>
 </html>
-
