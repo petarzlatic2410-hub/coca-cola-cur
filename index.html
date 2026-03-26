@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>McDonald's PRO MAX</title>
+<title>McDonald's FINAL ELITE</title>
 
 <style>
 :root{--red:#d62828;--yellow:#fcbf49;--bg:#fafafa;--card:#fff;--text:#222}
@@ -12,41 +12,50 @@ body{margin:0;font-family:Arial;background:var(--bg);color:var(--text)}
 header{background:var(--red);color:white;padding:12px;display:flex;justify-content:space-between}
 button{background:var(--yellow);border:none;padding:8px;border-radius:6px;cursor:pointer}
 
-.hero{text-align:center;padding:30px}
+.hero{text-align:center;padding:20px}
 
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;padding:20px}
 .card{background:var(--card);padding:10px;border-radius:10px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,0.1);transition:.2s}
-.card:hover{transform:scale(1.05)}
+.card:hover{transform:scale(1.08)}
 .card img{width:100%;height:140px;object-fit:cover;border-radius:8px}
 
 .cart{position:fixed;right:-350px;top:0;width:350px;height:100%;background:var(--card);transition:.3s;padding:15px}
 .cart.open{right:0}
 
-.search{padding:10px;text-align:center}
-input{padding:8px;width:200px}
+.search{text-align:center}
+input{padding:8px;width:220px}
 
-.badge{background:red;color:white;border-radius:50%;padding:4px 8px;margin-left:5px}
+.ai-buttons{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-top:10px}
+.ai-buttons button{background:#ff9f1c}
 
 </style>
 </head>
 <body>
 
 <header>
-<div>🍔 McDonald's PRO</div>
+<div>🍔 ELITE MODE</div>
 <div>
 <button onclick="toggleDark()">🌙</button>
-<button onclick="toggleCart()">🛒 <span id="count" class="badge">0</span></button>
+<button onclick="toggleCart()">🛒 (<span id="count">0</span>)</button>
 </div>
 </header>
 
 <div class="hero">
-<h1>Napredna verzija sajta</h1>
-<button onclick="recommend()">🤖 AI Preporuka</button>
+<h1>MAX FUNKCIJA 🔥</h1>
+
+<div class="ai-buttons">
+<button onclick="ai1()">Combo</button>
+<button onclick="ai2()">Najjeftinije</button>
+<button onclick="ai3()">Najskuplje</button>
+<button onclick="ai4()">Random</button>
+<button onclick="ai5()">Za bulk</button>
+</div>
 <p id="ai"></p>
+
 </div>
 
 <div class="search">
-<input type="text" id="search" placeholder="Pretraži..." onkeyup="filter()">
+<input id="search" placeholder="Traži..." onkeyup="filter()">
 </div>
 
 <div class="grid" id="menu"></div>
@@ -57,7 +66,7 @@ input{padding:8px;width:200px}
 <div id="items"></div>
 <h3 id="total"></h3>
 <button onclick="checkout()">💳 Plati</button>
-<button onclick="clearCart()">🗑 Očisti</button>
+<button onclick="clearCart()">🗑 Clear</button>
 </div>
 
 <script>
@@ -82,7 +91,6 @@ el.innerHTML=`<img src="${p.img}"><h3>${p.name}</h3><p>${p.price} RSD</p><button
 menu.appendChild(el);
 });
 }
-
 renderMenu(products);
 
 let cart=[];
@@ -104,10 +112,12 @@ function toggleDark(){document.body.classList.toggle('dark')}
 function checkout(){alert('Plaćeno ✅');cart=[];updateCart();}
 function clearCart(){cart=[];updateCart();}
 
-function recommend(){
-let combos=["Big Mac + Cola","Nuggets + Pomfrit","Milkshake combo","Cheese + Fanta"];
-document.getElementById('ai').innerText=combos[Math.floor(Math.random()*combos.length)];
-}
+/* MULTI AI */
+function ai1(){document.getElementById('ai').innerText="Big Mac + Cola"}
+function ai2(){document.getElementById('ai').innerText="Pomfrit (najjeftinije)"}
+function ai3(){document.getElementById('ai').innerText="Big Mac (najskuplje)"}
+function ai4(){let r=products[Math.floor(Math.random()*products.length)];document.getElementById('ai').innerText=r.name}
+function ai5(){document.getElementById('ai').innerText="Uzmi sve 😈"}
 
 function filter(){
 let val=document.getElementById('search').value.toLowerCase();
