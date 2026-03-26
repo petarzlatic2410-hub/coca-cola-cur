@@ -1,256 +1,154 @@
 <!DOCTYPE html>
 <html lang="sr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coca-Cola Ukusi</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>McDonald's Srbija - Ultimate Fan Site</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Roboto', sans-serif;
+    :root{
+      --red:#d62828; --yellow:#fcbf49; --orange:#f77f00; --bg:#fff8e1; --text:#222; --card:#fff; --shadow:0 8px 20px rgba(0,0,0,.12);
     }
+    body.dark{ --bg:#121212; --text:#eee; --card:#1e1e1e; --shadow:0 8px 20px rgba(0,0,0,.6);} 
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial, Helvetica, sans-serif;background:var(--bg);color:var(--text);transition:.3s}
+    header{position:sticky;top:0;z-index:10;background:var(--red);color:#fff;padding:16px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+    header .title{font-weight:900;font-size:22px}
+    nav a{color:#fff;text-decoration:none;margin:0 10px;font-weight:700}
+    nav a:hover{text-decoration:underline}
+    .actions{display:flex;gap:10px;align-items:center}
+    .btn{background:var(--orange);border:none;color:#fff;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700}
+    .btn:hover{filter:brightness(.9)}
 
-    body {
-      background: linear-gradient(to bottom, #f00 0%, #fff 100%);
-      color: #fff;
-      overflow-x: hidden;
-    }
+    .hero{height:320px;background:url('https://images.unsplash.com/photo-1550547660-d9450f859349') center/cover no-repeat;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+    .hero h1{color:#fff;font-size:42px;text-shadow:2px 2px 10px #000;opacity:0;transform:translateY(40px);animation:fadeUp .8s forwards}
+    @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
 
-    header {
-      background-color: #e10600;
-      padding: 20px;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
+    .container{padding:18px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+    .card{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:12px;text-align:center;transition:.25s;position:relative;overflow:hidden}
+    .card:hover{transform:translateY(-6px) scale(1.02)}
+    .card img{width:100%;height:120px;object-fit:cover;border-radius:10px}
+    .card h3{margin:10px 0 6px}
+    .price{font-weight:900}
 
-    header h1 {
-      font-size: 2.5rem;
-      letter-spacing: 2px;
-      text-shadow: 2px 2px 5px #000;
-    }
+    .floating-cart{position:fixed;right:12px;bottom:12px;background:var(--red);color:#fff;padding:12px 16px;border-radius:999px;cursor:pointer;box-shadow:var(--shadow)}
 
-    nav {
-      margin-top: 10px;
-    }
+    .cart{position:fixed;right:0;top:0;height:100%;width:320px;background:var(--card);box-shadow:var(--shadow);transform:translateX(100%);transition:.3s;padding:16px;overflow:auto;z-index:20}
+    .cart.open{transform:translateX(0)}
+    .cart h2{margin-top:0}
+    .cart-item{display:flex;justify-content:space-between;margin:6px 0}
 
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin: 0 10px;
-      font-weight: bold;
-      transition: 0.3s;
-    }
+    .game{margin-top:30px;padding:20px;background:var(--card);border-radius:12px;text-align:center}
+    .burger{font-size:40px;cursor:pointer;transition:.1s}
+    .burger:active{transform:scale(1.2)}
 
-    nav a:hover {
-      text-decoration: underline;
-    }
+    footer{background:var(--red);color:#fff;text-align:center;padding:14px;margin-top:20px}
 
-    .container {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 0 20px;
-      position: relative;
-      z-index: 2;
-    }
-
-    section {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 30px;
-      margin-bottom: 30px;
-      border-radius: 15px;
-      backdrop-filter: blur(10px);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    section:hover {
-      transform: scale(1.02);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-    }
-
-    section h2 {
-      color: #ffd1dc;
-      margin-bottom: 15px;
-      font-size: 2rem;
-      text-align: center;
-    }
-
-    section p, section li {
-      font-size: 1.1rem;
-      margin-bottom: 10px;
-    }
-
-    ul {
-      list-style: disc;
-      padding-left: 20px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-
-    table, th, td {
-      border: 1px solid #fff;
-    }
-
-    th, td {
-      padding: 10px;
-      text-align: center;
-    }
-
-    th {
-      background-color: #ff4c4c;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #e10600;
-      margin-top: 40px;
-      box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 10px 25px;
-      background-color: #fff;
-      color: #e10600;
-      font-weight: bold;
-      border-radius: 30px;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    .btn:hover {
-      background-color: #ffd1dc;
-      color: #e10600;
-      transform: scale(1.1);
-    }
-
-    /* Animacija mehurića */
-    .bubbles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .bubble {
-      position: absolute;
-      bottom: -50px;
-      width: 15px;
-      height: 15px;
-      background: rgba(255,255,255,0.7);
-      border-radius: 50%;
-      animation: rise 6s infinite ease-in;
-    }
-
-    @keyframes rise {
-      0% { transform: translateY(0) scale(1); opacity: 1; }
-      100% { transform: translateY(-1200px) scale(1.5); opacity: 0; }
-    }
+    @media(max-width:600px){header{flex-direction:column;align-items:flex-start}.hero h1{font-size:28px}}
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Coca-Cola Ukusi</h1>
-    <nav>
-      <a href="#cherry">Cherry</a>
-      <a href="#vanilla">Vanilla</a>
-      <a href="#zero">Zero</a>
-      <a href="#posluzivanje">Saveti</a>
-      <a href="#nutritivna">Nutritivna</a>
-      <a href="#istorija">Istorija</a>
-    </nav>
-  </header>
-
-  <!-- Mehurići -->
-  <div class="bubbles"></div>
-
-  <div class="container">
-
-    <section id="cherry">
-      <h2>Coca-Cola Cherry</h2>
-      <p>Slatko, sočno i neodoljivo. Prvi voćni ukus koji je osvojio srca miliona. Kombinacija klasičnog i avanturističkog. Početno gaziranje praćeno bogatim, voćnim finišem. Savršen balans između klasičnog i drugačijeg.</p>
-    </section>
-
-    <section id="vanilla">
-      <h2>Coca-Cola Vanilla</h2>
-      <p>Mekani ukus vanile sa poznatim Coca-Cola osveženjem. Slatka, ali ne previše. Idealan izbor za one koji vole klasično piće sa blagim twistom. Savršeno za tople letnje dane i poslastice.</p>
-    </section>
-
-    <section id="zero">
-      <h2>Coca-Cola Zero</h2>
-      <p>Bez šećera, punog ukusa. Za one koji žele klasik bez kalorija. Osećaj gaziranja i poznati Coca-Cola okus ostaje netaknut. Idealan uz bilo koji obrok ili samostalno piće.</p>
-    </section>
-
-    <section id="posluzivanje">
-      <h2>Saveti i Posluživanje</h2>
-      <ul>
-        <li>Najbolje se služi ohlađeno na 4°C, u staklenoj čaši sa 3-4 kocke leda.</li>
-        <li>Odlično ide uz burgere, roštilj, pa čak i čokoladne deserte.</li>
-      </ul>
-    </section>
-
-    <section id="nutritivna">
-      <h2>Nutritivna Tabela (Coca-Cola Cherry)</h2>
-      <table>
-        <tr>
-          <th>Energija</th>
-          <th>Masti</th>
-          <th>Ugljeni hidrati</th>
-          <th>Šećeri</th>
-          <th>Proteini</th>
-          <th>So</th>
-        </tr>
-        <tr>
-          <td>190 kJ / 45 kcal</td>
-          <td>0g</td>
-          <td>11.2g</td>
-          <td>11.2g</td>
-          <td>0g</td>
-          <td>0.0g</td>
-        </tr>
-      </table>
-    </section>
-
-    <section id="istorija">
-      <h2>Zanimljivosti i Istorija</h2>
-      <p>Prvi put predstavljena kao limitirano izdanje u SAD-u 1985. godine, ali je zbog neverovatne popularnosti postala stalni član Coca-Cola porodice.</p>
-      <a href="#cherry" class="btn">Nazad na vrh</a>
-    </section>
-
+<header>
+  <div class="title">McDonald's 🍔</div>
+  <nav>
+    <a href="#">Početna</a>
+    <a href="#meni">Meni</a>
+    <a href="#game">Mini Game</a>
+  </nav>
+  <div class="actions">
+    <button class="btn" onclick="toggleDark()">🌙</button>
+    <button class="btn" onclick="toggleCart()">🛒</button>
   </div>
+</header>
 
-  <footer>
-    &copy; 2026 Coca-Cola. Sva prava zadržana.
-  </footer>
+<div class="hero">
+  <h1>Poruči sve iz Meka 🔥</h1>
+</div>
 
-  <script>
-    // Generisanje mehurića
-    const bubblesContainer = document.querySelector('.bubbles');
-    for(let i=0; i<50; i++) {
-      const bubble = document.createElement('div');
-      bubble.classList.add('bubble');
-      bubble.style.left = Math.random() * 100 + 'vw';
-      bubble.style.width = 5 + Math.random() * 20 + 'px';
-      bubble.style.height = bubble.style.width;
-      bubble.style.animationDuration = 4 + Math.random() * 6 + 's';
-      bubble.style.animationDelay = Math.random() * 5 + 's';
-      bubblesContainer.appendChild(bubble);
-    }
-  </script>
+<div class="container" id="meni">
+  <h2>Meni (full)</h2>
+  <div class="grid" id="menu"></div>
+</div>
+
+<div class="game" id="game">
+  <h2>Mini Game: Klikni burger 🍔</h2>
+  <p>Score: <span id="score">0</span></p>
+  <div class="burger" onclick="clickBurger()">🍔</div>
+</div>
+
+<div class="floating-cart" onclick="toggleCart()">🛒 Korpa (<span id="count">0</span>)</div>
+
+<div class="cart" id="cart">
+  <h2>Tvoja porudžbina</h2>
+  <div id="cartItems"></div>
+  <h3>Ukupno: <span id="total">0</span> RSD</h3>
+</div>
+
+<footer>
+  Ultimate McDonald's Fan Site 🚀
+</footer>
+
+<script>
+  const items = [
+    {name:"Big Mac", price:450},
+    {name:"Cheeseburger", price:250},
+    {name:"Double Cheeseburger", price:350},
+    {name:"McChicken", price:300},
+    {name:"Filet-O-Fish", price:400},
+    {name:"Quarter Pounder", price:500},
+    {name:"Pomfrit", price:200},
+    {name:"Nuggets 6", price:300},
+    {name:"Nuggets 9", price:400},
+    {name:"Coca-Cola", price:180},
+    {name:"Fanta", price:180},
+    {name:"Sprite", price:180},
+    {name:"Milkshake", price:350},
+    {name:"Sladoled", price:150},
+    {name:"Apple Pie", price:200}
+  ];
+
+  const menuDiv = document.getElementById('menu');
+  items.forEach(i=>{
+    const el = document.createElement('div');
+    el.className='card';
+    el.innerHTML=`<img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd"><h3>${i.name}</h3><div class='price'>${i.price} RSD</div><button class='btn' onclick="add('${i.name}',${i.price})">Poruči</button>`;
+    menuDiv.appendChild(el);
+  });
+
+  let cart=[];
+
+  function add(name,price){
+    cart.push({name,price});
+    renderCart();
+  }
+
+  function renderCart(){
+    const list=document.getElementById('cartItems');
+    list.innerHTML='';
+    let total=0;
+    cart.forEach(i=>{
+      total+=i.price;
+      list.innerHTML+=`<div class='cart-item'><span>${i.name}</span><span>${i.price}</span></div>`;
+    });
+    document.getElementById('total').innerText=total;
+    document.getElementById('count').innerText=cart.length;
+  }
+
+  function toggleCart(){
+    document.getElementById('cart').classList.toggle('open');
+  }
+
+  function toggleDark(){
+    document.body.classList.toggle('dark');
+  }
+
+  let score=0;
+  function clickBurger(){
+    score++;
+    document.getElementById('score').innerText=score;
+  }
+</script>
 
 </body>
 </html>
